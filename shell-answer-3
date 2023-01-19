@@ -1,0 +1,24 @@
+#!/bin/bash
+while true
+do
+   echo "Hello world" >> hello.txt			//First Script---> sleep.sh
+   sleep 10
+done & echo $! > pid.file
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+#!/bin/bash
+while true
+do
+   count=$(wc -l < hello.txt)
+   if [ $count -eq 10 ]; then
+      pid=$(cat pid.file)
+      kill -9 $pid				              //Second Script--> delete.sh
+      rm hello.txt
+      ./sleep.sh & echo $! > pid.file
+   fi
+   sleep 1
+done
+
+--------------------------------------------------------------------------------------------------------------------------------------------
