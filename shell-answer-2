@@ -1,0 +1,17 @@
+1-	sudo nano /usr/bin/sleep.sh 
+2-	sudo chmod +x /usr/bin/sleep.sh 
+
+3-	sudo nano /lib/systemd/system/shellscript.service 
+
+3.1-	[Unit]
+	Description=My Shell Script      
+
+	[Service]
+	ExecStart=/usr/bin/sleep.sh
+                                                           Save the file and close it.
+	[Install]
+	WantedBy=multi-user.target
+4-	sudo systemctl daemon-reload 
+5-	sudo systemctl enable shellscript.service 
+6-	sudo systemctl start shellscript.service 
+7-	sudo systemctl status shellscript.service 
